@@ -207,13 +207,17 @@ func (eng *Engine) NewGame(opts NewGameOpts) {
 	if opts.Variant.Key == "chess960" || opts.Variant.Key == "fromPosition" {
 		eng.SetOption("UCI_Variant", "chess")
 		eng.SetOption("UCI_Chess960", "true")
+		eng.SetOption("Use NNUE", true)
 	} else {
 		if opts.Variant.Key == "threeCheck" {
 			eng.SetOption("UCI_Variant", "3check")
+			eng.SetOption("Use NNUE", false)
 		} else if opts.Variant.Key == "standard" {
 			eng.SetOption("UCI_Variant", "chess")
+			eng.SetOption("Use NNUE", true)
 		} else {
 			eng.SetOption("UCI_Variant", strings.ToLower(opts.Variant.Key))
+			eng.SetOption("Use NNUE", false)
 		}
 		eng.SetOption("UCI_Chess960", "false")
 	}
